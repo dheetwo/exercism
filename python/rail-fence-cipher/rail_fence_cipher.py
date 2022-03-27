@@ -18,7 +18,6 @@ def decode(encoded_message, rails):
     message_rows = []
     horizontal_position = 0
     vertical_position = 0
-    print(len(encoded_message))
     for index, letter in enumerate(encoded_message):
         if index * period_length <= len(encoded_message):
             position_list.append(index * period_length)
