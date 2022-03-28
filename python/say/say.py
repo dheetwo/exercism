@@ -57,5 +57,3 @@ def say(number):
         raise ValueError("input out of range")
     else:
         return int_to_en(number)
-
-print(say(123479234))
