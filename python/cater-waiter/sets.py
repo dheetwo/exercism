@@ -47,15 +47,15 @@ def categorize_dish(dish_name, dish_ingredients):
     All dishes will "fit" into one of the categories imported from `sets_categories_data.py`
     (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
     """
-    if dish_ingredients.is_subset(VEGAN):
+    if dish_ingredients.issubset(VEGAN):
         return dish_name + ": VEGAN"
-    if dish_ingredients.is_subset(VEGETARIAN):
+    if dish_ingredients.issubset(VEGETARIAN):
         return dish_name + ": VEGETARIAN"
-    if dish_ingredients.is_subset(PALEO):
+    if dish_ingredients.issubset(PALEO):
         return dish_name + ": PALEO"
-    if dish_ingredients.is_subset(KETO):
+    if dish_ingredients.issubset(KETO):
         return dish_name + ": KETO"
-    if dish_ingredients.is_subset(OMNIVORE):
+    if dish_ingredients.issubset(OMNIVORE):
         return dish_name + ": OMNIVORE"
 
 
@@ -69,8 +69,12 @@ def tag_special_ingredients(dish):
     For the purposes of this exercise, all allergens or special ingredients that need to be tracked are in the
     SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
     """
-    for item in dish[1]:
-        if item.
+    tagged_list = []
+    for ingredient in dish[1]:
+        if ingredient in SPECIAL_INGREDIENTS:
+            print(ingredient)
+            tagged_list.append(ingredient)
+    return dish[0], set(tagged_list)
 
 
 def compile_ingredients(dishes):
@@ -81,8 +85,7 @@ def compile_ingredients(dishes):
 
     This function should return a `set` of all ingredients from all listed dishes.
     """
-
-    pass
+    return set.union(*dishes)
 
 
 def separate_appetizers(dishes, appetizers):
@@ -95,8 +98,7 @@ def separate_appetizers(dishes, appetizers):
     The function should return the list of dish names with appetizer names removed.
     Either list could contain duplicates and may require de-duping.
     """
-
-    pass
+    return set(dishes) - (set(dishes) & set(appetizers))
 
 
 def singleton_ingredients(dishes, intersection):
@@ -111,5 +113,4 @@ def singleton_ingredients(dishes, intersection):
     Each `<CATEGORY>_INTERSECTION` is an `intersection` of all dishes in the category.
     The function should return a `set` of ingredients that only appear in a single dish.
     """
-
-    pass
+    return set.symmetric_difference(set.union(*dishes), intersection)
